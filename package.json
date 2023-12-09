@@ -1,0 +1,65 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.1.1",
+    "@shopify/app-bridge": "^3.4.3",
+    "@shopify/app-bridge-react": "^3.4.3",
+    "@shopify/app-bridge-utils": "^3.4.3",
+    "@shopify/polaris": "^12.0.0",
+    "@shopify/polaris-icons": "^7.9.0",
+    "@shopify/polaris-tokens": "6.3.0",
+    "axios": "^0.21.4",
+    "eslint-import-resolver-jsconfig": "^1.1.0",
+    "eslint-import-resolver-webpack": "^0.13.2",
+    "fs": "0.0.1-security",
+    "moment": "^2.29.1",
+    "papaparse": "^5.4.1",
+    "prop-types": "^15.7.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
+    "react-icons": "^4.2.0",
+    "@tanstack/react-query": "^4.29.15",
+    "react-router-dom": "^6.11.2",
+    "use-query-params": "^2.2.1",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "prettier": "1.19.1",
+    "vite": "^4.4.5"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "shared"
+    ],
+    "modulePathIgnorePatterns": [
+      "public"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/resources/js/setupTests.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/resources/js/helpers/styleMock.js",
+      "\\.(gif|ttf|eot|svg)$": "<rootDir>/resources/js/helpers/fileMock.js"
+    }
+  }
+}

@@ -1,0 +1,98 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use App\Exceptions\ShopifyBillingException;
+use App\Lib\AuthRedirection;
+use App\Lib\EnsureBilling;
+use App\Lib\TopLevelRedirection;
+use App\Models\Shop;
+use App\Models\User;
+use Closure;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Shopify\Clients\Graphql;
+use Shopify\Context;
+use Shopify\Utils;
+
+class EnsureShopifySession
+{
+    public const ACCESS_MODE_ONLINE = 'online';
+    public const ACCESS_MODE_OFFLINE = 'offline';
+
+    public const TEST_GRAPHQL_QUERY = <<<QUERY
+    {
+        shop {
+            name
+        }
+    }
+    QUERY;
+
+    /**
+     * Checks if there is currently an active Shopify session.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  string  $accessMode
+     * @return mixed
+     */
+    public function handle(Request $request, Closure $next, string $accessMode = self::ACCESS_MODE_OFFLINE)
+    {
+        switch ($accessMode) {
+            case self::ACCESS_MODE_ONLINE:
+                $isOnline = true;
+                break;
+            case self::ACCESS_MODE_OFFLINE:
+                $isOnline = false;
+                break;
+            default:
+                throw new Exception(
+                    "Unrecognized access mode '$accessMode', accepted values are 'online' and 'offline'"
+                );
+        }
+
+        $shop = Utils::sanitizeShopDomain($request->query('shop', ''));
+        $session = Utils::loadCurrentSession($request->header(), $request->cookie(), $isOnline);
+
+        if ($session && $shop && $session->getShop() !== $shop) {
+            // This request is for a different shop. Go straight to login
+            return AuthRedirection::redirect($request);
+        }
+
+        if ($session && $session->isValid()) {
+            // Make a request to ensure the access token is still valid. Otherwise, re-authenticate the user.
+            $client = new Graphql($session->getShop(), $session->getAccessToken());
+            $response = $client->query(self::TEST_GRAPHQL_QUERY);
+
+            $proceed = $response->getStatusCode() === 200;
+
+
+            if ($proceed) {
+                $request->attributes->set('shopifySession', $session);
+                $currentShop = Shop::query()
+                    ->select()
+                    ->where('shop', $session->getShop())
+                    ->first();
+                $user = User::where('shop_id', $currentShop->id)
+                    ->first();
+                auth()->login($user);
+                return $next($request);
+            }
+        }
+
+        $bearerPresent = preg_match("/Bearer (.*)/", $request->header('Authorization', ''), $bearerMatches);
+        if (!$shop) {
+            if ($session) {
+                $shop = $session->getShop();
+            } elseif (Context::$IS_EMBEDDED_APP) {
+                if ($bearerPresent !== false) {
+                    $payload = Utils::decodeSessionToken($bearerMatches[1]);
+                    $shop = parse_url($payload['dest'], PHP_URL_HOST);
+                }
+            }
+        }
+
+        return TopLevelRedirection::redirect($request, "/api/auth?shop=$shop");
+    }
+}
