@@ -29,10 +29,6 @@ class FileController extends Controller
         return $this->fileService->getFileByShopId($shopId);
     }
 
-    public function show($id) {
-
-    }
-
     public function store(Request $request) {
         $shopId = $this->shopId();
         if(!$shopId) {

@@ -61,7 +61,6 @@ Route::group([
     ], function () {
         Route::group(['middleware'=> 'scope:read_files'], function () {
             Route::get('/files', [FileController::class, 'index'])->name('files.index');
-            Route::get('file/{id}', [FileController::class, 'show'])->name('files.show');
         });
 
         Route::group(['middleware' => 'scope:write_files'], function () {
