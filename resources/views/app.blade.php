@@ -23,7 +23,9 @@
 
 <body>
 <div id="root"></div>
-<script type="module" src="http://localhost:5174/resources/js/index.jsx"></script>
+@if(app()->environment('local'))
+  <script type="module" src="http://localhost:5174/resources/js/index.jsx"></script>
+@endif
 </body>
 
 </html>
