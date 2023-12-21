@@ -19,7 +19,7 @@
     <script type="module" src="http://localhost:5174/@vite/client"></script>
   @else
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ config('secom.cdn_base_script_tag') }}/dist/{{ $cssFileName }}" />
+    <link rel="stylesheet" href="{{ config('shopify.cdn_base_script_tag') }}/dist/{{ $cssFileName }}" />
   @endif
 </head>
 
@@ -28,7 +28,7 @@
 @if(app()->environment('local'))
   <script type="module" src="http://localhost:5174/resources/js/index.jsx"></script>
 @else
-  <script type="module" src="{{ config('secom.cdn_base_script_tag') }}/dist/{{ $jsFileName }}"></script>
+  <script type="module" src="{{ config('shopify.cdn_base_script_tag') }}/dist/{{ $jsFileName }}"></script>
 @endif
 </body>
 
