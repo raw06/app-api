@@ -7,7 +7,6 @@
 
 	<title>{{ config('app.name', 'Laravel') }}</title>
 
-	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
   @if(app()->environment('local'))
     <script type="module">
@@ -18,7 +17,9 @@
       window.__vite_plugin_react_preamble_installed__ = true
     </script>
     <script type="module" src="http://localhost:5174/@vite/client"></script>
-
+  @else
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ config('secom.cdn_base_script_tag') }}/dist/{{ $cssFileName }}" />
   @endif
 </head>
 
