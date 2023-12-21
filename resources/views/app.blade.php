@@ -18,6 +18,7 @@
       window.__vite_plugin_react_preamble_installed__ = true
     </script>
     <script type="module" src="http://localhost:5174/@vite/client"></script>
+
   @endif
 </head>
 
@@ -25,6 +26,8 @@
 <div id="root"></div>
 @if(app()->environment('local'))
   <script type="module" src="http://localhost:5174/resources/js/index.jsx"></script>
+@else
+  <script type="module" src="{{ config('secom.cdn_base_script_tag') }}/dist/{{ $jsFileName }}"></script>
 @endif
 </body>
 
