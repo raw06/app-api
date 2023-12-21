@@ -9,14 +9,16 @@
 
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-  <script type="module">
-    import RefreshRuntime from 'http://localhost:5174/@react-refresh'
-    RefreshRuntime.injectIntoGlobalHook(window)
-    window.$RefreshReg$ = () => {}
-    window.$RefreshSig$ = () => (type) => type
-    window.__vite_plugin_react_preamble_installed__ = true
-  </script>
-  <script type="module" src="http://localhost:5174/@vite/client"></script>
+  @if(app()->environment('local'))
+    <script type="module">
+      import RefreshRuntime from 'http://localhost:5174/@react-refresh'
+      RefreshRuntime.injectIntoGlobalHook(window)
+      window.$RefreshReg$ = () => {}
+      window.$RefreshSig$ = () => (type) => type
+      window.__vite_plugin_react_preamble_installed__ = true
+    </script>
+    <script type="module" src="http://localhost:5174/@vite/client"></script>
+  @endif
 </head>
 
 <body>
