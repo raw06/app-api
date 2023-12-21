@@ -42,20 +42,7 @@ class AppServiceProvider extends ServiceProvider
             '',
             null,
         );
-
-        /* Repository */
-        $this->app->bind(
-            \App\Repositories\Product\ProductRepository::class,
-            \App\Repositories\Product\ProductRepositoryEloquent::class
-        );
         $this->app->bind(\App\Repositories\File\FileRepository::class, \App\Repositories\File\FileRepositoryEloquent::class);
-
-
-        /* Service */
-        $this->app->bind(
-            \App\Services\Product\ProductService::class,
-            \App\Services\Product\ProductServiceImp::class
-        );
         $this->app->bind(\App\Services\Integration\IntegrationService::class, \App\Services\Integration\IntegrationServiceImp::class);
         $this->app->bind(\App\Services\File\FileService::class, \App\Services\File\FileServiceImp::class);
 
