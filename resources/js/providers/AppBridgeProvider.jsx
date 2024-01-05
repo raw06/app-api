@@ -12,6 +12,10 @@ const navigationLinks = [
   {
     label: 'Files',
     destination: '/files'
+  },
+  {
+    label: 'Integrations',
+    destination: '/integrations'
   }
 ];
 

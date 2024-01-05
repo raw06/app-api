@@ -4,7 +4,8 @@ const API_ROUTES = {
     ALL: 'files',
     CREATE: 'files/create',
     REMOVE: (id) => `file/${id}`
-  }
+  },
+  PARTNER: 'integrations'
 };
 
 export default API_ROUTES;

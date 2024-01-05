@@ -32,3 +32,10 @@ export const useDeleteFilesMutation = (
     reactQueryOptions
   });
 };
+
+export const usePartnerQuery = (reactQueryOptions = {}) => {
+  return useAppQuery({
+    url: API_ROUTES.PARTNER,
+    reactQueryOptions
+  });
+};

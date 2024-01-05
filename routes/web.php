@@ -44,6 +44,7 @@ Route::group([
     Route::get('file/{id}', [FileController::class, 'show'])->name('files.show');
     Route::post('files/create', [FileController::class, 'store'])->name('files.create');
     Route::delete('/file/{id}', [FileController::class, 'destroy'])->name('files.delete');
+    Route::get('integrations', [\App\Http\Controllers\IntegrationController::class, 'index']);
 });
 
 Route::post('/api/uninstall', [AppController::class, 'uninstalledWebhook'])->middleware('webhook-request');

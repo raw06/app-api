@@ -45,6 +45,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\File\FileRepository::class, \App\Repositories\File\FileRepositoryEloquent::class);
         $this->app->bind(\App\Services\Integration\IntegrationService::class, \App\Services\Integration\IntegrationServiceImp::class);
         $this->app->bind(\App\Services\File\FileService::class, \App\Services\File\FileServiceImp::class);
+        $this->app->bind(\App\Repositories\Partner\PartnerRepository::class, \App\Repositories\Partner\PartnerRepositoryEloquent::class);
+        $this->app->bind(\App\Services\Partner\PartnerService::class, \App\Services\Partner\PartnerServiceImp::class);
 
     }
 
