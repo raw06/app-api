@@ -46,7 +46,7 @@ class AuthServiceProvider extends ServiceProvider
             'write_files'  => 'Write Files',
         ]);
 
-        Passport::tokensExpireIn(now()->addMinutes(1));
-        Passport::refreshTokensExpireIn(now()->addMinutes(10));
+        Passport::tokensExpireIn(now()->addMinutes(60));
+        Passport::refreshTokensExpireIn(now()->addMinutes(120));
     }
 }
