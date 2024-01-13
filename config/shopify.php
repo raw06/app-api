@@ -5,5 +5,6 @@ return [
         env('SHOPIFY_PERMISSIONS')
     ],
     'host' => env('APP_HOST'),
-    "cdn_base_script_tag"        => env("CDN_BASE_SCRIPT_TAG", "")
+    "cdn_base_script_tag"        => env("CDN_BASE_SCRIPT_TAG", ""),
+    "shared_secret" => env('SHOPIFY_API_SECRET', "")
 ];
