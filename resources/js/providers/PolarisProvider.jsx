@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { AppProvider } from '@shopify/polaris';
 import { useNavigate } from 'react-router-dom';
 import '@shopify/polaris/build/esm/styles.css';
@@ -27,7 +27,6 @@ function AppBridgeLink({ url, children, external, ...rest }) {
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <a {...rest} onClick={handleClick}>
       {children}
     </a>

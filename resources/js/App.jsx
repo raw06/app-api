@@ -12,9 +12,9 @@ import ShopProvider from './providers/ShopProvider';
 
 export default function App() {
   return (
-    <PolarisProvider>
-      <ReactQueryProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+      <PolarisProvider>
+        <ReactQueryProvider>
           <QueryParamProvider adapter={ReactRouter6Adapter}>
             <AppBridgeProvider>
               <ExitIframeProvider>
@@ -24,8 +24,8 @@ export default function App() {
               </ExitIframeProvider>
             </AppBridgeProvider>
           </QueryParamProvider>
-        </BrowserRouter>
-      </ReactQueryProvider>
-    </PolarisProvider>
+        </ReactQueryProvider>
+      </PolarisProvider>
+    </BrowserRouter>
   );
 }

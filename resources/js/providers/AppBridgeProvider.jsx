@@ -3,21 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { NavigationMenu, Provider } from '@shopify/app-bridge-react';
 import { Banner, Layout, Page } from '@shopify/polaris';
 import { createApp } from '@shopify/app-bridge';
-
-const navigationLinks = [
-  {
-    label: 'Dashboard',
-    destination: '/'
-  },
-  {
-    label: 'Files',
-    destination: '/files'
-  },
-  {
-    label: 'Integrations',
-    destination: '/integrations'
-  }
-];
+import { Redirect } from '@shopify/app-bridge/actions';
 
 // eslint-disable-next-line react/prop-types
 export function AppBridgeProvider({ children }) {
@@ -26,7 +12,7 @@ export function AppBridgeProvider({ children }) {
   const history = useMemo(
     () => ({
       replace: (path) => {
-        navigate(path);
+        navigate(path, { replace: true });
       }
     }),
     [navigate]
@@ -36,6 +22,23 @@ export function AppBridgeProvider({ children }) {
     history,
     location
   ]);
+
+  const links = useMemo(() => {
+    return [
+      {
+        label: 'Dashboard',
+        destination: '/'
+      },
+      {
+        label: 'Files',
+        destination: '/files'
+      },
+      {
+        label: 'Integrations',
+        destination: '/integrations'
+      }
+    ];
+  }, []);
 
   const [appBridgeConfig] = useState(() => {
     const host =
@@ -90,14 +93,15 @@ export function AppBridgeProvider({ children }) {
     );
   }
   const app = createApp(appBridgeConfig);
+  app.subscribe(Redirect.Action.APP, () => {});
   window.app = app;
 
   return (
     <Provider config={appBridgeConfig} router={routerConfig}>
       <NavigationMenu
-        navigationLinks={navigationLinks}
+        navigationLinks={links}
         matcher={(link, locat) => {
-          return locat.pathname.includes(link.destination);
+          return link.destination === locat.pathname;
         }}
       />
       {children}
