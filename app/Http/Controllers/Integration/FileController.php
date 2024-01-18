@@ -51,6 +51,7 @@ class FileController extends Controller
     }
 
     public function destroy($id) {
+        info($id);
         $deleteFile = $this->fileService->removeFile($id);
 
         if(!$deleteFile) {
