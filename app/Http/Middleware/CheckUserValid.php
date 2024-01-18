@@ -2,12 +2,14 @@
 
 namespace App\Http\Middleware;
 
+use App\Traits\InstalledShop;
 use Closure;
 use Illuminate\Http\Request;
 use Lcobucci\JWT\Configuration;
 
 class CheckUserValid
 {
+    use InstalledShop;
     /**
      * Handle an incoming request.
      *
@@ -17,7 +19,7 @@ class CheckUserValid
      */
     public function handle(Request $request, Closure $next)
     {
-        $shop = $request->get('shop');
+        $shop = $this->shop()->shop;
         $token =  $request->bearerToken();
         if($this->checkInvalidShopRequest($shop, $token)) {
             return $next($request);
