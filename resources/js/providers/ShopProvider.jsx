@@ -17,6 +17,7 @@ function ShopProvider({ children }) {
   if (isFetching) {
     return <AppSpinner />;
   }
+  window.shop = data;
 
   return (
     <ShopContext.Provider value={{ ...data }}>
