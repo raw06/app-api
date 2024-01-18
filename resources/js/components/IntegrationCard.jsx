@@ -13,7 +13,7 @@ import { useCallback } from 'react';
 
 export default function IntegrationCard({ partner }) {
   const handleRedirect = useCallback((link) => {
-    window.open(link);
+    window.open(`${link}?shop=${window.shop}`);
   }, []);
 
   return (
