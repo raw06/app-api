@@ -18,8 +18,7 @@ class FileServiceImp extends BaseServiceImp implements FileService {
 
     private function storeFile(UploadedFile $file, string $shopName, string $type = 'files') {
         $extension = $file->extension();
-        $fileOriginName = collect(explode(".", $file->getClientOriginalName()))->first();
-        $fileName = $fileOriginName. "-" .now()->timestamp.rand(0,100);
+        $fileName = now()->timestamp.rand(0,100);
         Storage::putFileAs("public/$shopName/$type", $file, "$fileName.$extension");
         return config('app.url'). Storage::disk('local')->url("public/$shopName/$type/$fileName.$extension");
     }
