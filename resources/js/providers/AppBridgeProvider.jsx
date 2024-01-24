@@ -27,7 +27,7 @@ export function AppBridgeProvider({ children }) {
     return [
       {
         label: 'Dashboard',
-        destination: '/'
+        destination: '/home'
       },
       {
         label: 'Files',
