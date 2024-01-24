@@ -19,6 +19,9 @@ export default defineConfig(({ mode }) => {
       renderBuiltUrl(filename) {
         return `${process.env.VITE_CDN_BASE_SCRIPT_TAG}/dist/${filename}`;
       }
+    },
+    optimizeDeps: {
+      exclude: ['js-big-decimal']
     }
   });
 });

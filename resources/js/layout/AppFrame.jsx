@@ -1,5 +1,5 @@
 import { Frame } from '@shopify/polaris';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from '../pages/Dashboard';
 import Files from '../pages/Files';
 import ToastProvider from '../hooks/useToast';
@@ -10,7 +10,8 @@ export default function AppFrame() {
     <Frame>
       <ToastProvider>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<Dashboard />} />
           <Route path="/files" element={<Files />} />
           <Route path="/integrations" element={<Integration />} />
         </Routes>
