@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class IntegrationLoginController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         return response()->json([
             'message'     => 'Welcome to Integration Shopify App Public API',
-            'instruction' => 'https://google.com'
+            'instruction' => 'https://documenter.getpostman.com/view/16942369/2s9YsT589g'
         ]);
     }
 

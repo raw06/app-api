@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Route;
 use Shopify\Utils;
 use App\Models\Session;
 use App\Http\Controllers\API\FileController;
-
+use App\Http\Controllers\IntegrationController;
+use App\Http\Controllers\LogInController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,10 +45,10 @@ Route::group([
     Route::get('file/{id}', [FileController::class, 'show'])->name('files.show');
     Route::post('files/create', [FileController::class, 'store'])->name('files.create');
     Route::delete('/file/{id}', [FileController::class, 'destroy'])->name('files.delete');
-    Route::get('integrations', [\App\Http\Controllers\IntegrationController::class, 'index']);
+    Route::get('integrations', [IntegrationController::class, 'index']);
 });
 
 Route::post('/api/uninstall', [AppController::class, 'uninstalledWebhook'])->middleware('webhook-request');
 
-Route::fallback([\App\Http\Controllers\LogInController::class, 'index'])
+Route::fallback([LogInController::class, 'index'])
     ->middleware('shopify.installed');

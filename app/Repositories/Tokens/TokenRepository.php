@@ -3,7 +3,9 @@
 namespace App\Repositories\Tokens;
 
 use App\Models\PassportToken;
+use App\Models\User;
 use Carbon\Carbon;
+use Laravel\Passport\Client;
 
 class TokenRepository extends \Laravel\Passport\TokenRepository {
 
@@ -14,7 +16,7 @@ class TokenRepository extends \Laravel\Passport\TokenRepository {
      * @param  \Laravel\Passport\Client  $client
      * @return PassportToken |null
      */
-    public function findInValidTokens($user, $client)
+    public function findInValidTokens(User $user, Client $client)
     {
         return $client->tokens()
             ->whereUserId($user->getAuthIdentifier())
