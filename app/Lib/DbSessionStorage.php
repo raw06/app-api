@@ -31,8 +31,6 @@ class DbSessionStorage implements SessionStorage
             }
             if ($dbSession->scope) {
                 $session->setScope($dbSession->scope);
-            } else {
-                $session->setScope(config('shopify.scopes'));
             }
             if ($dbSession->user_id) {
                 $onlineAccessInfo = new AccessTokenOnlineUserInfo(
