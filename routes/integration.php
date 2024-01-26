@@ -61,12 +61,12 @@ Route::group([
         ]
     ], function () {
         Route::group(['middleware'=> 'scope:read_files'], function () {
-            Route::get('/files', [FileController::class, 'index'])->name('files.index');
+            Route::get('/files', [FileController::class, 'index'])->name('api.files.index');
         });
 
         Route::group(['middleware' => 'scope:write_files'], function () {
-           Route::post('files/create', [FileController::class, 'store'])->name('files.create');
-           Route::delete('/file/{id}', [FileController::class, 'destroy'])->name('files.delete');
+           Route::post('files/create', [FileController::class, 'store'])->name('api.files.create');
+           Route::delete('/file/{id}', [FileController::class, 'destroy'])->name('api.files.delete');
         });
 
     });
